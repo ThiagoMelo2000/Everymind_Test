@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method="POST" enctype='multipart/form-data' class="form">{% csrf_token %}
+
+    <input type="text" name="first_name" class="form-item" placeholder="Nome" required>
+
+    <input type="text" name="last_name" class="form-item" placeholder="Sobrenome" required>
+
+    <select name="sex" class="form-item">
+        <option value="male">Masculino</option>
+        <option value="female">Feminino</option>
+        <option value="empty">Prefiro não declarar</option>
+    </select>
+
+    <input type="text" name="username" class="form-item" placeholder="Usuário" required maxlength="25">
+
+    <input type="email" name="email" class="form-item" placeholder="Email" required>
+
+    <input type="password" name="password" class="form-item" placeholder="Senha" required>
+
+    <input type="password" name="password2" class="form-item" placeholder="Confirme a Senha" required>
+
+    <input type="date" name="birth_date" class="form-item" placeholder="Data de Nascimento" required>
+
+    <button type="submit" class="btn btn-dark">Registrar</button>
+
+    <p class="error">{{ error }}</p>
+
+    <p class="jserror"></p>
+
+</form>
+<script>
+
+    form = document.querySelector('.form');
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        if (form.password.value == form.password2.value) {
+            form.submit()
+        } else {
+            document.querySelector('.jserror').textContent = 'Senhas não batem'
+        }
+    })
+
+</script>
+{% endblock content %}
